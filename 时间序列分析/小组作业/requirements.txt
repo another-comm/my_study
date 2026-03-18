@@ -1,0 +1,11 @@
+akshare>=1.17.0
+pandas>=0.25
+numpy>=1.26.0
+matplotlib>=3.0
+yfinance>=0.2.0
+tensorflow>=2.0.0
+prophet>=1.0.0
+statsmodels>=0.13.0
+arch>=5.0.0
+scikit-learn>=1.0.0
+tqdm>=4.43.0

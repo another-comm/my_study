@@ -1,0 +1,6 @@
+conda activate slim_env
+cd /d C:\study\MyLaTeXApp
+python Local_LaTeX_App.py
+python Final_App_Ultimate.py
+pyinstaller --noconsole --onefile --add-binary "tectonic.exe;." Local_LaTeX_App.py
+pyinstaller --noconsole --onefile --add-binary "tectonic.exe;." Final_App_Ultimate.py

@@ -1,0 +1,12 @@
+{
+    "provider": "Google Gemini",
+    "api_key": "AIzaSyBjsq1zAg7O2xunwiPJaLIf5HiJ1h9-DnI",
+    "proxy_url": "http://127.0.0.1:7897",
+    "auto_proxy": true,
+    "model_name": "gemini-2.5-flash",
+    "custom_prompts": {
+        "标准试卷/文档": "\n你是一个顶级的 LaTeX 排版专家。请将提供的图片内容识别并合并转换为一个排版精美、专业的 LaTeX 文档。\n\n**排版核心要求**：\n1. **文档类与版面**：使用 `\\documentclass[12pt, a4paper]{article}`，并设置 `\\usepackage{geometry}` 页边距 2.5cm。\n2. **必备宏包**：amsmath, amssymb, graphicx, enumitem, hyperref。\n3. **中文支持**：⚠️必须使用 `\\usepackage{ctex}` 以支持中文显示。\n4. **排版细节**：使用 `\\section` 结构化内容；独立公式用 `equation` 或 `align` 环境；段落间距 `1em`。\n5. **输出格式**：只返回纯 LaTeX 代码，不要 Markdown 标记。\n",
+        "读书笔记/摘要": "\n你是一个高效的笔记整理助手。请识别图片内容，并整理成一份结构清晰的 LaTeX 读书笔记。\n\n**核心要求**：\n1. **文档类**：使用 `article` 文档类。\n2. **中文支持**：⚠️必须使用 `\\usepackage{ctex}`。\n3. **内容处理**：**不要**逐字逐句照搬，而是提取核心观点、定义和公式。\n4. **美化**：使用 `tcolorbox` 宏包将重要概念包裹在框中。\n5. **输出**：自动生成摘要和小结，只返回纯代码。\n",
+        "纯公式提取": "\n请只提取图片中的所有数学公式。\n\n**核心要求**：\n1. **文档类**：使用 `article` 文档类。\n2. **中文支持**：如有中文说明，必须使用 `\\usepackage{ctex}`。\n3. **内容处理**：忽略大部分纯文本描述，只保留公式和必要的变量说明。\n4. **排版**：所有公式按顺序排列，使用 `align*` 环境。\n5. **输出**：只返回纯代码。\n"
+    }
+}

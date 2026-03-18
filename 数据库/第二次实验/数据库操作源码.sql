@@ -1,0 +1,31 @@
+-- 创建数据库
+
+CREATE DATABASE test;
+
+CREATE DATABASE IF NOT EXISTS test;
+
+CREATE DATABASE test1 CHARACTER SET gbk;
+
+ALTER DATABASE test1 CHARACTER SET utf8;
+
+-- 修改字符串
+
+USE shop;
+
+-- 删除数据库
+
+DROP DATABASE test1;
+
+DROP DATABASE IF EXITS test1;
+
+-- 查看数据库详细信息
+
+SHOW CREATE DATABASE test1;
+
+-- 查看所有数据库
+
+SHOW DATABASES;
+
+-- 查看警告信息
+
+SHOW WARNINGS;

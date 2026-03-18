@@ -1,0 +1,11 @@
+﻿Country,STEM_Grads_Scale,Total_Grads,STEM_Intensity,Compute_EFLOPS,Private_Invest_B$,AI_Patents_Scale,Policy_Index
+USA,85,410,0.2073,85,105.2,3.9,8.8
+China,485,1200,0.4042,42,34.5,13.2,9.7
+UAE,2.8,12,0.2333,15.5,13.8,0.09,9.9
+UK,19,92,0.2065,4.5,8.9,0.6,9
+France,17,85,0.2000,5.2,6.5,0.4,8.2
+South Korea,16,62,0.2581,8.8,4.2,2.2,8.8
+Japan,22,65,0.3385,9.2,3.5,1.9,8.5
+Germany,22,68,0.3235,3.8,6.4,0.8,7.8
+Canada,13,55,0.2364,2.5,4.8,0.3,8.5
+India,265,1050,0.2524,3.2,4.6,1.3,7.5

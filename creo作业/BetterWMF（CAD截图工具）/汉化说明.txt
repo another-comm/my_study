@@ -1,0 +1,80 @@
+                    欢迎使用【亚风工作室】的汉化作品
+
+一、软件信息
+———————————————————————————————————
+    软件名称：BetterWMF 汉化版
+    软件版本：4.02
+    原版下载：（不需要）
+    运行环境：Windows9X/ME/2000/XP
+    汉化作者：王风华
+    Email:yfgzsw@163.com
+
+二、软件简介
+———————————————————————————————————
+    BetterWMF 是一款可以将 AutoCAD 中的 DWG 图形拷贝到 Word 中的软件。它的
+独特之处是在拷贝时可以自动去除那令人烦恼的黑色背景并具有自动修剪图形的空白
+边缘、自动填充颜色、自动将 DWG 格式的图形文件转变为 WMF 图像格式的功能，另
+外它还能对图形进行缩放、旋转，并能根据使用者的需要对线条的宽度和颜色进行设
+置。如果你是一位专业制图人员，或者你是一位需要编辑图纸资料的设计人员，那么 
+BetterWMF 一定可以作为你的首选。
+   本软件所支持的 AutoCAD 版本：R14，2000，2000i，2002，2004。
+    BetterWMF ARX 命令：BCOPYCLIP － 复制到剪贴板  BWMFOPT － 打开选项对话框
+BWMFOUT － 保存 WMF 文件
+    
+
+三、声明
+———————————————————————————————————
+    此软件版权归原作者所有；此汉化版中的汉化资源版权归本人所有。使用本汉化文件，
+纯属您自己的选择，本人不对此文件给您造成的任何损失负责！
+
+
+四、任何问题及建议请联系 
+———————————————————————————————————
+       Email:yfgzsw@163.com
+   
+                                                                 
+              ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+              ☆                                            ☆
+              ☆          【亚风工作室】  其它汉化作品      ☆  
+              ☆                                            ☆
+              ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆ 
+
+
+
+———————————————————————————————————
+ R2V V5.5.030801 (光栅图矢量化工具)
+ Acme CAD Converter  V3.62（CAD 图形文件批量转换）
+ Raster to Vector Conversion Toolkit V2.61（图象矢量化）
+ Jpeg Imager V2.1.0.19 (图像压缩)
+ Algolab Photo Vector  V1.95 (图象矢量化)
+ NED4 V2.23 (文本编辑器)
+ Image Optimizer V4.00 (图象优化)
+ AcmeCadSee V3.0 (CAD 图形文件浏览)
+ BDV DataHider V1.0（数据加密）
+ HTML Splitter V1.3.0.1（HTML 文件分割）
+ JongPuzzle V3.12（找对子游戏）
+ BetterWMF V4.00 （CAD 图形到 Word 转换）
+ ClickPuzzle V2.31（益智游戏）
+ PDF-Creator　V2.0（PDF 制作）
+ AutoHook2004  V1.01 (AutoCAD 2004 键盘宏定义器)
+ AutoHook2002  V1.03 (AutoCAD 2002 键盘宏定义器)
+ RAM Def XT  V2.71(内存整理)
+ speed4web  V2.2.3 (网络加速）
+ Autodesk Express  Viewer  V3.0（DWF 图形文件查看工具）
+ AutoDWG convert  V1.0（DWG 和 DXF 文件批量转换工具）
+ Amethyst CADwizz  V1.25j（多功能 CAD 图形管理）
+ Touchpro  V4.3.0.0 (Windows下的文件时间属性修改专家)
+ Deep Green Reversi  V4.5.5  (黑白棋) 
+ PCMedik  V4.10.31.2002 (系统优化)
+ Deep Pockets  V3.5 (棋类逻辑游戏)
+ ShxViewer  V1.1 (SHX字型浏览)
+ 3D Soma Puzzle  V2.0(方块游戏)
+ ClipCase  V1.4 (剪贴板工具)
+ HTML Compress  V4.1.0.659 (网页压缩工具）
+ Time Synchronizer  V1.2 (网络对时校正工具)
+ 3Dmaze  V3.0 (3D界面的迷宫游戏)
+ 台北麻将 V2.02 (益智游戏)
+ B-Puzzle  V5.1（七巧板拼图游戏）
+ MineSweeper3D  V1.0 (3D界面的扫雷游戏)
+
+

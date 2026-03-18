@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 MCM Problem B 核心建模数据集 & AI 助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', 'SimSun', sans-serif; background-color: #f1f5f9; }
+        .data-table th { background-color: #f8fafc; border: 1px solid #e2e8f0; font-weight: 700; padding: 12px; font-size: 0.75rem; text-transform: uppercase; }
+        .data-table td { border: 1px solid #e2e8f0; padding: 8px; font-size: 0.8rem; }
+        .zscore-cell { background-color: #f0fdf4; color: #166534; font-family: monospace; font-weight: 600; }
+        .export-ignore { display: block; }
+        
+        /* Word 导出样式控制 */
+        .word-content h1 { font-size: 24pt; font-weight: bold; margin: 25pt 0 15pt 0; color: #0f172a; border-bottom: 2pt solid #334155; padding-bottom: 5pt; }
+        .word-content h2 { font-size: 18pt; font-weight: bold; margin: 15pt 0 10pt 0; color: #1e293b; }
+        .word-content h3 { font-size: 14pt; font-weight: bold; margin: 10pt 0 5pt 0; color: #334155; }
+        .word-content p { font-size: 11pt; line-height: 1.6; margin-bottom: 10pt; color: #475569; }
+        .word-content ul { margin-bottom: 15pt; list-style-type: disc; padding-left: 20pt; }
+        .word-content li { font-size: 11pt; margin-bottom: 5pt; }
+        .word-content table { border-collapse: collapse; width: 100%; margin: 15pt 0; page-break-inside: avoid; }
+        .word-content th, .word-content td { border: 1pt solid #000; padding: 6pt; text-align: left; font-size: 9pt; }
+
+        /* AI 助手动画 */
+        @keyframes pulse-ring { 0% { transform: scale(.33); opacity: 1; } 80%, 100% { opacity: 0; } }
+        .ai-loading-dot { position: relative; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #6366f1; }
+        .ai-loading-dot::after { content: ''; position: absolute; left: -10px; top: -10px; width: 30px; height: 30px; border: 4px solid #6366f1; border-radius: 50%; animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="max-w-[1440px] mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden border border-slate-200">
+        <!-- 顶部操作栏 -->
+        <div class="p-8 bg-slate-900 text-white flex flex-col lg:flex-row justify-between items-center gap-6 export-ignore">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight">MCM 2025 Problem B 数据中心</h1>
+                <p class="text-slate-400 mt-2">卡尔曼滤波趋势、Z-Score 标准化系数及 2023 全量经济基准报告</p>
+            </div>
+            <div class="grid grid-cols-2 sm:flex gap-4">
+                <button onclick="exportToExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 font-bold shadow-md text-sm">
+                    导出全量 Excel
+                </button>
+                <button onclick="exportToWord()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 font-bold shadow-md text-sm">
+                    导出报告 Word
+                </button>
+            </div>
+        </div>
+
+        <!-- AI 助手 -->
+        <div class="p-8 bg-indigo-50 border-b border-indigo-100 export-ignore">
+            <h2 class="text-lg font-bold text-indigo-900 flex items-center gap-2 mb-4">✨ Gemini AI 建模助手</h2>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <button onclick="askAI('INSIGHTS')" class="bg-white border border-indigo-200 hover:bg-indigo-600 hover:text-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-bold transition shadow-sm">✨ 标准化指标关联分析</button>
+                <button onclick="askAI('POLICY')" class="bg-white border border-indigo-200 hover:bg-indigo-600 hover:text-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-bold transition shadow-sm">✨ 动态反馈分配方案</button>
+                <button onclick="askAI('PAPER')" class="bg-white border border-indigo-200 hover:bg-indigo-600 hover:text-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-bold transition shadow-sm">✨ 数据预处理方法论撰写</button>
+            </div>
+            <div id="ai-response-container" class="hidden">
+                <div class="bg-white rounded-xl p-6 border border-indigo-200 shadow-inner relative">
+                    <button onclick="document.getElementById('ai-response-container').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
+                    <div id="ai-loading" class="flex items-center gap-4 text-indigo-600 font-semibold mb-4 hidden"><div class="ai-loading-dot"></div> AI 正在结合 2023 基准与时序动量进行深度分析...</div>
+                    <div id="ai-result" class="prose prose-indigo max-w-none text-slate-700 text-sm leading-relaxed whitespace-pre-wrap"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="export-content" class="p-10 space-y-16 word-content">
+            <!-- 第一部分：2023 经济基准报告 (全量无简化版) -->
+            <section>
+                <h1>一、 朱诺市 2023 年旅游经济基准数据提取报告</h1>
+                <p>本报告基于《Economic Impact of Juneau's Cruise Industry 2023》官方报告，提供建模第一步所需的初始状态参数 ($X_0$)。</p>
+                
+                <h2>1.1 规模指标 (Volume Metrics)</h2>
+                <ul>
+                    <li><strong>年度邮轮游客总量 ($V$)：</strong> 1,670,000 人 (较 2019 年峰值增长 28%)</li>
+                    <li><strong>年度船员总量：</strong> 36,000 人</li>
+                    <li><strong>邮轮靠港次数 (Calls)：</strong> 700+ 次</li>
+                </ul>
+
+                <h2>1.2 经济支出指标 (Direct Spending)</h2>
+                <ul>
+                    <li><strong>总直接支出 ($E_{total}$)：</strong> $375,000,000</li>
+                    <li><strong>游客支出 ($E_p$)：</strong> $320,000,000 (占比 85%)</li>
+                    <li><strong>邮轮公司支出 ($E_l$)：</strong> $39,000,000 (占比 10%)</li>
+                    <li><strong>船员支出 ($E_c$)：</strong> $16,000,000 (占比 4%)</li>
+                    <li><strong>人均消费系数计算 ($e$)：</strong>
+                        <ul>
+                            <li><strong>仅计游客：</strong> $191.62 / 人</li>
+                            <li><strong>总支出分摊：</strong> 约 $224.55 / 游客 (常用于简化模型)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2>1.3 政府财政收入与资金池 (Municipal Revenues)</h2>
+                <p>这是反馈机制中“可持续发展资金池”的来源（总额：$22,284,000）：</p>
+                <table class="w-full">
+                    <thead><tr class="bg-slate-50"><th>收入项目</th><th>具体数值 (USD)</th><th>占比</th></tr></thead>
+                    <tbody>
+                        <tr><td>海洋乘客费 (Marine Passenger Fees)</td><td>$8,234,000</td><td>37.0%</td></tr>
+                        <tr><td>商业乘客船消费税 (CPV Tax)</td><td>$5,680,000</td><td>25.5%</td></tr>
+                        <tr><td>港口建设费 (Port Development Fees)</td><td>$4,917,000</td><td>22.1%</td></tr>
+                        <tr><td>港口维护费 (Port Maintenance Fees)</td><td>$1,378,000</td><td>6.2%</td></tr>
+                        <tr><td>大型邮轮停靠费 (Dockage Fees)</td><td>$950,000</td><td>4.3%</td></tr>
+                        <tr><td>饮用水费用 (Potable Water Fees)</td><td>$126,000</td><td>0.6%</td></tr>
+                        <tr><td>其他 (许可证/摊位等)</td><td>$999,000</td><td>4.3%</td></tr>
+                    </tbody>
+                </table>
+                <p><em>注：除此之外，邮轮产业还产生了 $17.7M 的销售税收入，可用于通用社区支出。</em></p>
+
+                <h2>1.4 社会影响指标 (Social Impacts)</h2>
+                <ul>
+                    <li><strong>总就业贡献：</strong> 3,850 个岗位 (直接就业 3,150 + 间接/诱导 700)</li>
+                    <li><strong>总劳动收入：</strong> $196,000,000</li>
+                    <li><strong>就业占比：</strong> 约占朱诺市总就业人数的 18%</li>
+                </ul>
+
+                <h2>1.5 行业分布细分 (Spending by Sector)</h2>
+                <table class="w-full">
+                    <thead><tr class="bg-slate-50"><th>所属行业</th><th>支出金额 (USD)</th><th>占比</th></tr></thead>
+                    <tbody>
+                        <tr><td>旅游与活动 (Tours & Activities)</td><td>$152,000,000</td><td>41%</td></tr>
+                        <tr><td>零售业 (Retail)</td><td>$144,000,000</td><td>38%</td></tr>
+                        <tr><td>餐饮业 (Food & Beverage)</td><td>$31,000,000</td><td>8%</td></tr>
+                        <tr><td>交通运输 (Transportation)</td><td>$14,000,000</td><td>4%</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 第二部分：25 年历史时序数据 (含 Z-Score) -->
+            <section>
+                <h1>二、 核心建模历史时序数据集 (2000-2024)</h1>
+                <p class="text-sm italic mb-4 text-slate-500">集成原始观测、卡尔曼平滑趋势及 Z-Score 标准化指标，用于多目标回归与灵敏度分析。</p>
+                <div class="overflow-x-auto">
+                    <table id="main-ts-table" class="data-table w-full text-center">
+                        <thead>
+                            <tr class="bg-slate-100">
+                                <th rowspan="2">年份</th>
+                                <th colspan="2" class="border-b">游客量(万人)</th>
+                                <th rowspan="2">增长率</th>
+                                <th colspan="4" class="bg-indigo-50 border-b text-indigo-900 font-bold">Z-Score 标准化系数 (无量纲)</th>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <th>原始</th>
+                                <th>平滑</th>
+                                <th class="zscore-cell">游客(Z)</th>
+                                <th class="zscore-cell">冰川(Z)</th>
+                                <th class="zscore-cell">气温(Z)</th>
+                                <th class="zscore-cell">HPI(Z)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body-timeseries"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 第三部分：建模约束与系数矩阵 (详细补全版) -->
+            <section>
+                <h1>三、 建模约束与系数矩阵</h1>
+                <p>用于定义模型的可行解空间边界 $\Omega$ 以及环境惩罚函数系数。</p>
+
+                <h2>3.1 邮轮碳排放因子与隐形代价</h2>
+                <table class="w-full">
+                    <thead><tr class="bg-slate-50"><th>排放类别</th><th>典型值 (大型邮轮)</th><th>单位</th><th>备注</th></tr></thead>
+                    <tbody>
+                        <tr><td>单位乘客碳排放</td><td>250 - 400</td><td>g $CO_2$ / pax-km</td><td>取决于船体能效等级</td></tr>
+                        <tr><td>人均每日碳足迹</td><td>0.82</td><td>tonnes $CO_2$e / day</td><td>包含航行及停靠全程分摊</td></tr>
+                        <tr><td>港口靠泊排放 (热机)</td><td>1.2 - 2.5</td><td>tonnes $CO_2$ / hour</td><td>大船停靠时的瞬时排放</td></tr>
+                        <tr class="font-bold"><td>影子成本 (Shadow Cost)</td><td>50 - 150</td><td>USD / tonne $CO_2$</td><td>碳排放的社会折算成本</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 class="mt-8">3.2 朱诺淡水供应容量约束 ($W_{cap}$)</h2>
+                <table class="w-full">
+                    <thead><tr class="bg-slate-50"><th>指标类别</th><th>数值</th><th>单位</th><th>备注</th></tr></thead>
+                    <tbody>
+                        <tr><td>Last Chance Basin (深井群)</td><td>~11.0 - 12.5</td><td>MGD (百万加仑/日)</td><td>主要供水来源</td></tr>
+                        <tr><td>Salmon Creek (水库/地表水)</td><td>~2.0 - 3.5</td><td>MGD</td><td>受降雨影响大</td></tr>
+                        <tr class="bg-yellow-50 font-bold"><td>总设计供水能力</td><td>14.5 - 16.0</td><td>MGD</td><td>系统硬上限 ($W_{max}$)</td></tr>
+                        <tr><td>冬季平均需求量</td><td>~3.5</td><td>MGD</td><td>居民基本盘</td></tr>
+                        <tr><td>夏季峰值需求量</td><td>6.5 - 8.5</td><td>MGD</td><td>含邮轮补给峰值</td></tr>
+                        <tr><td>单艘大船平均补给量</td><td>0.15 - 0.35</td><td>Million Gal</td><td>停靠加水消耗</td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const years = Array.from({length: 25}, (_, i) => 2000 + i);
+        
+        // 原始与平滑数据
+        const vRaw = [64.05, 69.07, 74.18, 77.69, 80.72, 92.11, 95.14, 101.73, 103.23, 101.73, 87.73, 87.55, 92.64, 95.44, 96.1, 98.3, 101.5, 107.2, 115.1, 130.6, 0.1, 11.7, 116.7, 167.0, 165.0];
+        const vSmoothed = [67.06, 70.68, 74.62, 78.65, 82.87, 87.52, 91.25, 94.20, 95.90, 96.72, 94.21, 92.35, 92.42, 93.28, 94.21, 95.45, 96.88, 99.21, 103.55, 111.23, 118.45, 126.78, 135.21, 148.55, 158.42];
+        
+        // Z-Score 标准化列
+        const vZ = [-1.5282, -1.3787, -1.2160, -1.0496, -0.8755, -0.6835, -0.5293, -0.4081, -0.3379, -0.3041, -0.4077, -0.4845, -0.4816, -0.4461, -0.4077, -0.3565, -0.2974, -0.2012, -0.0219, 0.2954, 0.5936, 0.9377, 1.2858, 1.8368, 2.2445];
+        const gZ = [-1.0007, -1.0797, -0.8690, -0.9217, -0.8163, -0.7373, -0.6583, -0.6056, -0.5529, -0.4739, -0.3949, -0.3422, -0.2895, -0.2105, -0.1315, -0.0261, 0.0529, 0.1319, 0.2373, 0.3953, 0.5796, 0.9748, 1.6335, 2.4239, 2.6874];
+        const tZ = [-0.8108, -1.1793, -0.5113, -0.4389, -0.6561, -0.4718, -1.6445, -1.2764, -2.0863, -0.5442, 0.4448, -0.6166, -0.6890, 0.3328, 1.1041, 1.1370, 1.3612, 0.7351, 1.0318, 1.3942, 0.5901, 0.4451, 0.6297, 0.9197, 1.0647];
+        const hZ = [-1.4286, -1.3611, -1.2711, -1.1574, -0.9975, -0.7322, -0.5629, -0.4113, -0.3320, -0.2870, -0.2491, -0.2053, -0.1413, -0.0561, -0.0123, 0.0634, 0.1428, 0.2281, 0.3394, 0.5029, 0.6747, 1.1343, 1.7692, 2.0736, 2.2821];
+
+        function fillTables() {
+            const container = document.getElementById('body-timeseries');
+            years.forEach((y, i) => {
+                let growth = i === 0 ? "-" : (((vSmoothed[i] - vSmoothed[i-1]) / vSmoothed[i-1]) * 100).toFixed(1) + "%";
+                container.innerHTML += `
+                    <tr>
+                        <td class="font-bold">${y}</td>
+                        <td class="text-slate-400">${vRaw[i]}</td>
+                        <td class="font-semibold text-indigo-700">${vSmoothed[i]}</td>
+                        <td>${growth}</td>
+                        <td class="zscore-cell">${vZ[i].toFixed(4)}</td>
+                        <td class="zscore-cell">${gZ[i].toFixed(4)}</td>
+                        <td class="zscore-cell">${tZ[i].toFixed(4)}</td>
+                        <td class="zscore-cell">${hZ[i].toFixed(4)}</td>
+                    </tr>`;
+            });
+        }
+
+        const apiKey = "";
+        async function askAI(type) {
+            const result = document.getElementById('ai-result');
+            document.getElementById('ai-response-container').classList.remove('hidden');
+            document.getElementById('ai-loading').classList.remove('hidden');
+            result.innerText = "";
+            const prompt = `Data: 2023 Baseline($375M Exp, $22.28M Rev), Water Cap 16MGD, Carbon Shadow Cost $50-150. Time Series: Z-Scores for V, G, T, HPI. Task: ${type}. 请结合标准化指标的波动，分析其在多目标优化模型中的权重设定逻辑。`;
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                const data = await response.json();
+                result.innerText = data.candidates[0].content.parts[0].text;
+            } catch (err) { result.innerText = "API Error."; } finally { document.getElementById('ai-loading').classList.add('hidden'); }
+        }
+
+        function exportToExcel() {
+            if (typeof XLSX === 'undefined') return alert("SheetJS Loading...");
+            const wb = XLSX.utils.book_new();
+            
+            // Sheet 1: Baseline 2023 (Full)
+            const bTable = [
+                ["2023 朱诺旅游经济基准报告"],
+                ["规模指标", "数值", "单位"],
+                ["年度游客量", 1670000, "人"],
+                ["邮轮靠港次数", 700, "次"],
+                ["直接支出指标", "金额(USD)", "占比"],
+                ["游客支出", 320000000, "85%"],
+                ["财政收入细分", "金额(USD)", "占比"],
+                ["海洋乘客费", 8234000, "37%"],
+                ["CPV 税", 5680000, "25.5%"],
+                ["港口建设费", 4917000, "22.1%"]
+            ];
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(bTable), "2023_Baseline");
+
+            // Sheet 2: Time Series (Normalized)
+            const tsData = years.map((y, i) => ({
+                "Year": y, "Visitors_Raw": vRaw[i], "Visitors_Smoothed": vSmoothed[i],
+                "V_ZScore": vZ[i], "Glacier_ZScore": gZ[i], "Temp_ZScore": tZ[i], "HPI_ZScore": hZ[i]
+            }));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(tsData), "TS_Normalized");
+
+            // Sheet 3: Constraints
+            const consts = [
+                ["约束项目", "数值", "单位", "备注"],
+                ["碳排影子成本", "50-150", "USD/t", "Shadow Cost"],
+                ["淡水上限", 16.0, "MGD", "W_max"],
+                ["夏季峰值", 8.5, "MGD", "Summer peak"]
+            ];
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(consts), "Constraints");
+
+            XLSX.writeFile(wb, "Juneau_Full_Dataset_V3.xlsx");
+        }
+
+        function exportToWord() {
+            const content = document.getElementById('export-content').innerHTML;
+            const blob = new Blob(['\ufeff', `<html><head><meta charset='utf-8'><style>body{font-family:'SimSun';} table{border-collapse:collapse;width:100%;} th,td{border:1px solid black;padding:4px;font-size:9pt;}</style></head><body>${content}</body></html>`], { type: 'application/msword' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Juneau_Full_Modeling_Report.doc'; a.click();
+        }
+
+        window.onload = fillTables;
+    </script>
+</body>
+</html>

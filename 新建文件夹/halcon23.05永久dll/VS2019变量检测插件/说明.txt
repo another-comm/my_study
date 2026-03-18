@@ -1,0 +1,4 @@
+可使用Everything查找类似halconxl.dll，类似路径（最后一层是随机目录）
+D:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\wpuuxrbv.2kt
+
+下替换halconxl.dll即可，不可与vs2022通用。

@@ -1,0 +1,12 @@
+{
+    "provider": "Google Gemini",
+    "api_key": "AIzaSyB9M_tusB2ivW5KJ1gOp3_OZT79xftlZrI",
+    "proxy_url": "http://127.0.0.1:7897",
+    "auto_proxy": true,
+    "model_name": "gemini-2.5-flash",
+    "custom_prompts": {
+        "标准试卷/文档": "\n你是一个顶级的 LaTeX 排版专家。请将提供的图片内容识别并合并转换为一个排版精美、专业的 LaTeX 文档。\n\n**排版核心要求**：\n1. **文档类与版面**：\n   - 使用 `\\documentclass[12pt, a4paper]{article}`。\n   - 使用 `\\usepackage[margin=2cm]{geometry}` (⚠️重要：增加版面宽度以防止溢出)。\n2. **必备宏包**：\n   - 数学：`amsmath, amssymb`\n   - 图片：`graphicx, float`\n   - 表格：`booktabs, array, tabularx, longtable, multirow`\n   - 中文支持：**必须仅使用 `\\usepackage{ctex}`** (⚠️不要加 fontset 参数，防止编译崩溃)。\n3. **防止溢出规则(⚠️严格执行)**：\n   - 图片：必须设置宽度，例如 `\\includegraphics[width=\\linewidth]{filename}`。\n   - 表格：**必须**使用 `tabularx` 环境，总宽度设为 `\\textwidth`。\n     例如：`\\begin{tabularx}{\\textwidth}{X|c|X}` (使用 X 列自动换行)。\n4. **输出格式**：只返回纯 LaTeX 代码，不要 Markdown 标记。\n",
+        "读书笔记/摘要": "\n你是一个高效的笔记整理助手。请识别图片内容，并整理成一份结构清晰的 LaTeX 读书笔记。\n**核心要求**：\n1. **文档类**：`article`。\n2. **中文支持**：使用 `\\usepackage{ctex}` (不要加 fontset)。\n3. **内容**：提取核心观点，使用 `tcolorbox` 包裹重点。\n4. **输出**：只返回纯代码。\n",
+        "纯公式提取": "\n请只提取图片中的所有数学公式。\n**核心要求**：\n1. **文档类**：`article`。\n2. **中文支持**：使用 `\\usepackage{ctex}` (不要加 fontset)。\n3. **内容**：只保留公式，使用 `align*` 环境。\n4. **输出**：只返回纯代码。\n"
+    }
+}

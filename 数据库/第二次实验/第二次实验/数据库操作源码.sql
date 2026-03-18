@@ -1,0 +1,34 @@
+-- 1创建数据库
+
+CREATE DATABASE test;
+
+CREATE DATABASE IF NOT EXISTS test;
+
+CREATE DATABASE test1 CHARACTER SET gbk;
+
+-- 2修改字符集
+
+ALTER DATABASE test1 CHARACTER SET utf8;
+
+-- 3打开数据库
+
+USE shop;
+
+-- 4删除数据库
+
+DROP DATABASE test1;
+
+DROP DATABASE IF EXISTS test1;
+
+-- 5查看数据库详细信息
+
+SHOW CREATE DATABASE test1;
+
+-- 6查看所有数据库
+
+SHOW DATABASES;
+
+-- 7查看警告信息
+
+SHOW WARNINGS;
+

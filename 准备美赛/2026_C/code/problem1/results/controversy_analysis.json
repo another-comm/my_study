@@ -1,0 +1,398 @@
+[
+  {
+    "analysis": {
+      "celebrity": "Jerry Rice",
+      "season": 2,
+      "final_placement": 2,
+      "weeks_competed": 7,
+      "avg_judge_rank": 4.857142857142857,
+      "avg_vote_rank": 2.5714285714285716,
+      "times_lowest_judge_score": 1,
+      "weeks_analysis": [
+        {
+          "week": 1,
+          "judge_score": 21.0,
+          "judge_rank": 5,
+          "estimated_vote_proportion": 0.10000001448333633,
+          "vote_rank": 2,
+          "rank_method_final": 2,
+          "pct_method_final": 5,
+          "n_contestants": 10
+        },
+        {
+          "week": 2,
+          "judge_score": 23.0,
+          "judge_rank": 4,
+          "estimated_vote_proportion": 0.1111111040703994,
+          "vote_rank": 7,
+          "rank_method_final": 3,
+          "pct_method_final": 4,
+          "n_contestants": 9
+        },
+        {
+          "week": 3,
+          "judge_score": 19.0,
+          "judge_rank": 7,
+          "estimated_vote_proportion": 0.12501373735076549,
+          "vote_rank": 1,
+          "rank_method_final": 4,
+          "pct_method_final": 7,
+          "n_contestants": 8
+        },
+        {
+          "week": 4,
+          "judge_score": 24.0,
+          "judge_rank": 5,
+          "estimated_vote_proportion": 0.1428571442517519,
+          "vote_rank": 4,
+          "rank_method_final": 2,
+          "pct_method_final": 5,
+          "n_contestants": 7
+        },
+        {
+          "week": 5,
+          "judge_score": 23.0,
+          "judge_rank": 5,
+          "estimated_vote_proportion": 0.166666673257634,
+          "vote_rank": 2,
+          "rank_method_final": 5,
+          "pct_method_final": 5,
+          "n_contestants": 6
+        },
+        {
+          "week": 6,
+          "judge_score": 23.0,
+          "judge_rank": 4,
+          "estimated_vote_proportion": 0.2000000125658261,
+          "vote_rank": 1,
+          "rank_method_final": 5,
+          "pct_method_final": 4,
+          "n_contestants": 5
+        },
+        {
+          "week": 7,
+          "judge_score": 20.5,
+          "judge_rank": 4,
+          "estimated_vote_proportion": 0.25000000667591943,
+          "vote_rank": 1,
+          "rank_method_final": 3,
+          "pct_method_final": 4,
+          "n_contestants": 4
+        }
+      ],
+      "judge_vote_gap": -2.285714285714285
+    },
+    "simulation": {
+      "celebrity": "Jerry Rice",
+      "season": 2,
+      "actual_placement": 2,
+      "weeks_competed": 7,
+      "rank_method_potential_eliminations": 1,
+      "pct_method_potential_eliminations": 1,
+      "method_makes_difference": false,
+      "recommendation": "Both methods produce similar outcomes."
+    }
+  },
+  {
+    "analysis": {
+      "celebrity": "Billy Ray Cyrus",
+      "season": 4,
+      "final_placement": 5,
+      "weeks_competed": 7,
+      "avg_judge_rank": 5.857142857142857,
+      "avg_vote_rank": 2.857142857142857,
+      "times_lowest_judge_score": 2,
+      "weeks_analysis": [
+        {
+          "week": 2,
+          "judge_score": 21.0,
+          "judge_rank": 6,
+          "estimated_vote_proportion": 0.094902519638733,
+          "vote_rank": 4,
+          "rank_method_final": 11,
+          "pct_method_final": 7,
+          "n_contestants": 11
+        },
+        {
+          "week": 3,
+          "judge_score": 21.0,
+          "judge_rank": 6,
+          "estimated_vote_proportion": 0.10491870233295143,
+          "vote_rank": 3,
+          "rank_method_final": 4,
+          "pct_method_final": 6,
+          "n_contestants": 10
+        },
+        {
+          "week": 4,
+          "judge_score": 21.0,
+          "judge_rank": 5,
+          "estimated_vote_proportion": 0.11711087159969995,
+          "vote_rank": 4,
+          "rank_method_final": 3,
+          "pct_method_final": 6,
+          "n_contestants": 9
+        },
+        {
+          "week": 5,
+          "judge_score": 17.0,
+          "judge_rank": 7,
+          "estimated_vote_proportion": 0.13857613296249624,
+          "vote_rank": 1,
+          "rank_method_final": 8,
+          "pct_method_final": 7,
+          "n_contestants": 8
+        },
+        {
+          "week": 6,
+          "judge_score": 21.0,
+          "judge_rank": 6,
+          "estimated_vote_proportion": 0.1587646730663165,
+          "vote_rank": 2,
+          "rank_method_final": 6,
+          "pct_method_final": 5,
+          "n_contestants": 7
+        },
+        {
+          "week": 7,
+          "judge_score": 19.0,
+          "judge_rank": 6,
+          "estimated_vote_proportion": 0.19941783059938278,
+          "vote_rank": 1,
+          "rank_method_final": 5,
+          "pct_method_final": 5,
+          "n_contestants": 6
+        },
+        {
+          "week": 8,
+          "judge_score": 19.0,
+          "judge_rank": 5,
+          "estimated_vote_proportion": 0.11342295910262185,
+          "vote_rank": 5,
+          "rank_method_final": 5,
+          "pct_method_final": 5,
+          "n_contestants": 5
+        }
+      ],
+      "judge_vote_gap": -2.9999999999999996
+    },
+    "simulation": {
+      "celebrity": "Billy Ray Cyrus",
+      "season": 4,
+      "actual_placement": 5,
+      "weeks_competed": 7,
+      "rank_method_potential_eliminations": 3,
+      "pct_method_potential_eliminations": 1,
+      "method_makes_difference": true,
+      "recommendation": "Percentage method is more favorable to this contestant."
+    }
+  },
+  {
+    "analysis": {
+      "celebrity": "Bristol Palin",
+      "season": 11,
+      "final_placement": 3,
+      "weeks_competed": 9,
+      "avg_judge_rank": 6.333333333333333,
+      "avg_vote_rank": 2.2222222222222223,
+      "times_lowest_judge_score": 4,
+      "weeks_analysis": [
+        {
+          "week": 1,
+          "judge_score": 18.0,
+          "judge_rank": 8,
+          "estimated_vote_proportion": 0.08646396392311645,
+          "vote_rank": 4,
+          "rank_method_final": 1,
+          "pct_method_final": 7,
+          "n_contestants": 12
+        },
+        {
+          "week": 2,
+          "judge_score": 22.0,
+          "judge_rank": 3,
+          "estimated_vote_proportion": 0.09403576531122187,
+          "vote_rank": 8,
+          "rank_method_final": 7,
+          "pct_method_final": 4,
+          "n_contestants": 11
+        },
+        {
+          "week": 3,
+          "judge_score": 19.0,
+          "judge_rank": 9,
+          "estimated_vote_proportion": 0.10614872243598655,
+          "vote_rank": 1,
+          "rank_method_final": 6,
+          "pct_method_final": 9,
+          "n_contestants": 10
+        },
+        {
+          "week": 4,
+          "judge_score": 16.0,
+          "judge_rank": 8,
+          "estimated_vote_proportion": 0.12021594083620304,
+          "vote_rank": 1,
+          "rank_method_final": 7,
+          "pct_method_final": 8,
+          "n_contestants": 9
+        },
+        {
+          "week": 5,
+          "judge_score": 18.0,
+          "judge_rank": 8,
+          "estimated_vote_proportion": 0.13820578516764742,
+          "vote_rank": 1,
+          "rank_method_final": 1,
+          "pct_method_final": 7,
+          "n_contestants": 8
+        },
+        {
+          "week": 6,
+          "judge_score": 27.9998,
+          "judge_rank": 6,
+          "estimated_vote_proportion": 0.15512312842868006,
+          "vote_rank": 2,
+          "rank_method_final": 6,
+          "pct_method_final": 5,
+          "n_contestants": 7
+        },
+        {
+          "week": 7,
+          "judge_score": 32.5,
+          "judge_rank": 6,
+          "estimated_vote_proportion": 0.18642006424148727,
+          "vote_rank": 1,
+          "rank_method_final": 3,
+          "pct_method_final": 5,
+          "n_contestants": 6
+        },
+        {
+          "week": 8,
+          "judge_score": 23.5,
+          "judge_rank": 5,
+          "estimated_vote_proportion": 0.235565077114851,
+          "vote_rank": 1,
+          "rank_method_final": 3,
+          "pct_method_final": 4,
+          "n_contestants": 5
+        },
+        {
+          "week": 9,
+          "judge_score": 26.5,
+          "judge_rank": 4,
+          "estimated_vote_proportion": 0.2994942485869099,
+          "vote_rank": 1,
+          "rank_method_final": 3,
+          "pct_method_final": 3,
+          "n_contestants": 4
+        }
+      ],
+      "judge_vote_gap": -4.111111111111111
+    },
+    "simulation": {
+      "celebrity": "Bristol Palin",
+      "season": 11,
+      "actual_placement": 3,
+      "weeks_competed": 9,
+      "rank_method_potential_eliminations": 0,
+      "pct_method_potential_eliminations": 0,
+      "method_makes_difference": false,
+      "recommendation": "Both methods produce similar outcomes."
+    }
+  },
+  {
+    "analysis": {
+      "celebrity": "Bobby Bones",
+      "season": 27,
+      "final_placement": 1,
+      "weeks_competed": 7,
+      "avg_judge_rank": 7.428571428571429,
+      "avg_vote_rank": 2.5714285714285716,
+      "times_lowest_judge_score": 1,
+      "weeks_analysis": [
+        {
+          "week": 1,
+          "judge_score": 20.0,
+          "judge_rank": 5,
+          "estimated_vote_proportion": 0.07920523031721953,
+          "vote_rank": 6,
+          "rank_method_final": 13,
+          "pct_method_final": 5,
+          "n_contestants": 13
+        },
+        {
+          "week": 2,
+          "judge_score": 19.5,
+          "judge_rank": 10,
+          "estimated_vote_proportion": 0.08694103403390131,
+          "vote_rank": 2,
+          "rank_method_final": 11,
+          "pct_method_final": 10,
+          "n_contestants": 12
+        },
+        {
+          "week": 3,
+          "judge_score": 23.0,
+          "judge_rank": 8,
+          "estimated_vote_proportion": 0.09497530478455303,
+          "vote_rank": 3,
+          "rank_method_final": 4,
+          "pct_method_final": 8,
+          "n_contestants": 11
+        },
+        {
+          "week": 4,
+          "judge_score": 20.0,
+          "judge_rank": 9,
+          "estimated_vote_proportion": 0.10582558839081024,
+          "vote_rank": 2,
+          "rank_method_final": 7,
+          "pct_method_final": 8,
+          "n_contestants": 10
+        },
+        {
+          "week": 6,
+          "judge_score": 22.0,
+          "judge_rank": 8,
+          "estimated_vote_proportion": 0.11908795842744684,
+          "vote_rank": 2,
+          "rank_method_final": 7,
+          "pct_method_final": 6,
+          "n_contestants": 9
+        },
+        {
+          "week": 7,
+          "judge_score": 26.5,
+          "judge_rank": 6,
+          "estimated_vote_proportion": 0.13354241954089108,
+          "vote_rank": 2,
+          "rank_method_final": 8,
+          "pct_method_final": 5,
+          "n_contestants": 8
+        },
+        {
+          "week": 8,
+          "judge_score": 22.5,
+          "judge_rank": 6,
+          "estimated_vote_proportion": 0.19155050694396203,
+          "vote_rank": 1,
+          "rank_method_final": 3,
+          "pct_method_final": 5,
+          "n_contestants": 6
+        }
+      ],
+      "judge_vote_gap": -4.857142857142858
+    },
+    "simulation": {
+      "celebrity": "Bobby Bones",
+      "season": 27,
+      "actual_placement": 1,
+      "weeks_competed": 7,
+      "rank_method_potential_eliminations": 2,
+      "pct_method_potential_eliminations": 0,
+      "method_makes_difference": true,
+      "recommendation": "Percentage method is more favorable to this contestant."
+    }
+  }
+]

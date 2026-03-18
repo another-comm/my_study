@@ -1,0 +1,242 @@
+\documentclass[twocolumn, UTF8, a4paper]{ctexart}
+
+% --- 宏包加载 ---
+\usepackage[left=2cm, right=2cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{abstract}
+\usepackage{cite}
+\usepackage{array}
+\usepackage{bm} % 用于数学公式加粗
+
+% --- 字体设置 ---
+% 设置西文字体为 Times New Roman
+\setmainfont{Times New Roman}
+% 设置中文字体为宋体 (系统中需有 SimSun 字体)
+\setCJKmainfont{SimSun}
+
+% --- 字号定义 ---
+% 小四 = 12pt, 五号 = 10.5pt
+\newcommand{\xiaosi}{\fontsize{12pt}{15pt}\selectfont}
+\newcommand{\wuhao}{\fontsize{10.5pt}{12.6pt}\selectfont}
+
+% 设置全文正文默认为小四号字
+\renewcommand{\normalsize}{\xiaosi}
+
+% --- 章节标题格式设置 ---
+\titleformat{\section}{\xiaosi\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\xiaosi\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\xiaosi\bfseries}{\thesubsubsection}{0.5em}{}
+
+% --- 摘要与关键词设置 ---
+\renewcommand{\abstractname}{摘要}
+\renewcommand{\abstracttextfont}{\xiaosi}
+
+% --- 论文基本信息 ---
+\title{\xiaosi \bfseries 基于熵权自适应粒子群算法与神经网络的最速降线轨迹优化研究}
+\author{}
+\date{}
+
+\begin{document}
+	
+	\maketitle
+	
+	% --- 摘要部分 ---
+	\begin{abstract}
+		最速降线问题是变分法与最优控制领域的经典课题。尽管在理想环境下存在解析解（摆线），但在引入摩擦力、空气阻力及离心力等复杂动力学约束的非保守物理场中，解析法往往很难求解。本文提出了一种结合物理信息神经网络（PINNs）与熵权粒子群算法的混合优化框架。首先，利用神经网络对路径进行参数化，并引入严格的数学拟设机制强制消除边界误差，将有约束优化转化为无约束优化。其次，针对物理损失函数高度非凸、易陷入局部最优的问题，提出了一种熵权自适应粒子群算法。该算法通过香农熵实时量化种群多样性，动态调节搜索策略。基于可微分物理引擎的仿真结果表明，在含非线性阻力与离心力，摩擦力的复杂场中，本文方法不仅能精准复现理想解，更能智能权衡“速度收益”与“能量损耗”，寻找到优于传统数值方法的物理可行解。
+	\end{abstract}
+	
+	\noindent \textbf{关键词：} 物理信息神经网络 (PINNs); 熵权自适应; 粒子群算法; 复杂动力学约束; 轨迹优化
+	
+	\section{引言}
+	
+	\subsection{经典问题与现实挑战}
+	自 1696 年 Johann Bernoulli 提出最速降线问题以来，其在重力场下的解析解——摆线，已成为物理学的经典结论。然而，随着无人机（UAV）自主导航、工业机械臂轨迹规划以及高速运输系统设计等现代工程需求的出现，传统的理想化模型面临严重挑战。在现实场景中，质点不仅受重力影响，还受到与速度平方成正比的非线性空气阻力、摩擦力以及运动路径弯曲产生的离心力影响。在这些非保守力场中，能量不再守恒，系统展现出高度的非线性和非凸性，使得解析推导变得异常困难，通常需要借助数值优化手段进行求解 [1]。
+	
+	\subsection{现有方法的局限性}
+	目前的求解方法主要分为两类，但各具局限：
+	1）传统数值法（如直接配点法）：极度依赖离散化精度。若采样点不足，生成的轨迹缺乏光滑性，且在处理起点导数奇异性（垂直下落）时易产生数值失真。
+	2）深度学习方法（如 PINNs）：虽然能提供连续光滑的解，但其物理损失函数通常具有高度非凸。传统的梯度优化器（如 SGD、Adam）在处理此类长程物理积分约束时，极易陷入局部极小值或遭遇梯度消失。
+	3）标准群智能算法（如 PSO）：虽然具备全局搜索能力，但其控制参数固定，在搜索后期容易发生“早熟收敛”，无法在复杂的物理空间中实现高精度微调。
+	
+	\subsection{相关工作与文献综述}
+	针对轨迹优化问题，Raed Abu Zitar [2] 探索了监督学习与强化学习神经网络在捕捉最速降线路径中的潜力，证明了神经网络在捕捉控制规律方面的优越性。而在全局寻优算法方面，粒子群算法（PSO）的应用十分广泛。为了提升 PSO 在复杂搜索空间中的效率，Zhan 等人 [4] 提出了自适应粒子群算法（APSO），通过进化状态估计（ESE）实时识别种群状态并调节参数。本文结合这一思路，进一步引入信息熵辅助策略来维护种群多样性 [5]，通过熵值的连续反馈实现更精准的“收敛-发散”切换，为解决复杂环境下的轨迹搜索提供了理论支撑。
+	
+	\subsection{研究目标与主要贡献}
+	本文的主要贡献如下：
+	1）基于Ansatz硬约束的神经路径参数化：我们并未简单地将神经网络输出作为路径点，而是设计了一种特殊的数学结构，将线性基线与网络输出的非线性偏差相结合，通过乘以边界因子，从数学上强制保证了所有生成的轨迹严格满足起始点 (0,0) 和终点 ($x_{end}, y_{end}$) 的边界条件。这极大地压缩了搜索空间，提高了优化的有效性。
+	2）熵权驱动的自适应参数调节机制：针对 PSO 的早熟问题，我们引入了信息熵的概念来度量粒子群的“混乱度”或“多样性”。基于这一熵值，我们设计了一套自适应规则，动态调整惯性权重 ($w$) 和学习因子 ($c_1, c_2$)。
+	3）可微分物理引擎的构建：我们实现了一个基于PyTorch的可微分物理引擎，实现了从路径几何到物理耗时的端到端梯度传播。
+	4）算法改进后的仿真：验证了改进算法在收敛精度、速度及跳出局部最优能力上的优势。
+	
+	\section{问题描述与数学建模}
+	
+	\subsection{广义最速降线问题的物理模型}
+	考虑一个质点在重力场中从点 A(0,0) 运动到点 B($x_{end}, y_{end}$)。
+	
+	\subsubsection{理想情况 (Conservative Field)}
+	假设初速度为0，质点在垂直高度 $y$ 处的速度 $v$ 仅由势能转化为动能决定：
+	\begin{equation}
+		\frac{1}{2}mv^2 = mgy \Rightarrow v(y) = \sqrt{2gy}
+	\end{equation}
+	目标是最小化总时间泛函 $J[y]$：
+	\begin{equation}
+		J[y] = \int_0^{x_{end}} \frac{ds}{v} = \int_0^{x_{end}} \sqrt{\frac{1+(y'(x))^2}{2gy(x)}} dx
+	\end{equation}
+	
+	\subsubsection{复杂物理场 (Non-Conservative Field)}
+	假设存在动摩擦系数 $\mu$ 和空气阻力系数 $C_d$。
+	1）摩擦力：$f_f = \mu N$。法向力 $N$ 包含离心力：
+	\begin{equation}
+		N = mg\cos\theta + \frac{mv^2}{R}
+	\end{equation}
+	2）空气阻力：简化为 $F_{drag} = k_{drag}v^2$。
+	根据动能定理：
+	\begin{equation}
+		d\left(\frac{1}{2}mv^2\right) = (mg\sin\theta - f_f - F_d)ds
+	\end{equation}
+	
+	\subsection{神经网络路径参数化与Ansatz约束}
+	本文采用了 Ansatz 硬约束技术。我们将最终的路径输出 $y(x)$ 定义为：
+	\begin{equation}
+		y(x) = \frac{y_{end}}{x_{end}} \cdot x + x \cdot (x - x_{end}) \cdot N(x; \theta)
+	\end{equation}
+	其中，第一项为线性偏置，第二项包含边界因子。
+	
+	\section{算法原理与改进：熵权自适应粒子群算法}
+	
+	\subsection{标准粒子群算法 (PSO) 及其局限性}
+	标准PSO更新公式：
+	\begin{equation}
+		v_{i}^{t+1} = wv_{i}^t + c_1 r_1(pbest_i - x_i) + c_2 r_2(gbest - x_i)
+	\end{equation}
+	\begin{equation}
+		x_{i}^{t+1} = x_i^t + v_{i}^{t+1}
+	\end{equation}
+	
+	\subsection{引入熵权的多样性度量}
+	香农熵计算公式：
+	\begin{equation}
+		H = \frac{1}{D} \sum_{d=1}^D \left( -\sum_{j=1}^N p_j \ln p_j \right)
+	\end{equation}
+	
+	\subsection{自适应参数调节策略}
+	具体的自适应规则如下表所示：
+	
+	\begin{table}[h]
+		\caption{熵权自适应规则矩阵}
+		\xiaosi
+		\begin{tabular}{lp{1.2cm}p{3.5cm}}
+			\toprule
+			熵值范围 (H) & 状态 & 参数调整策略 \\
+			\midrule
+			低熵 (H<0.1) & 聚集 & 增大 w(0.9), $c_1$(2.0), 减小 $c_2$(1.0) \\
+			高熵 (H>0.5) & 发散 & 减小 w(0.4), $c_1$(1.0), 增大 $c_2$(2.0) \\
+			中熵 (其他) & 平衡 & $w=0.7, c_1=1.5, c_2=1.5$ \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\subsection{算法实现整体流程}
+	Step 1: 路径参数化与 Ansatz 构建；Step 2: 粒子群初始化；Step 3: 物理场驱动的损失函数评估；Step 4: 种群多样性监控；Step 5: 自适应策略更新；Step 6: 粒子进化；Step 7: 局部梯度精调；Step 8: 终止判定。
+	
+	\section{基于物理信息的神经网络表示}
+	
+	\subsection{边界守恒型 PINNs 架构设计}
+	本研究采用多层感知机 (MLP) 作为路径生成器。
+	拓扑结构：输入层(1) $\rightarrow$ 隐藏层1(16) $\rightarrow$ 隐藏层2(16) $\rightarrow$ 输出层(1)。激活函数采用 Tanh。
+	
+	\subsection{双路径可微分物理引擎构建}
+	1）保守场：向量化计算；2）非保守场：递归积分法。
+	
+	\subsection{复合损失函数设计}
+	\begin{equation}
+		Loss = T_{total} + \lambda_1 P_{height} + \lambda_2 P_{uphill} + \lambda_3 P_{bc}
+	\end{equation}
+	
+	\subsection{混合进化方案与超参数配置}
+	\begin{table}[h]
+		\caption{实验配置参数表}
+		\xiaosi
+		\begin{tabular}{lll}
+			\toprule
+			分类 & 参数名称 & 数值 \\
+			\midrule
+			物理环境 & $x_{end}, y_{end}$ & 1.0, 1.0 \\
+			优化算法 & M(粒子规模) & 80 \\
+			混合策略 & Steps\_grad & 200 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\section{结果分析与讨论}
+	
+	\subsection{优化历史与收敛性分析}
+	收敛至 0.583381 秒，与理论值 0.5832s 接近。
+	
+	\subsection{轨迹形态与物理合理性}
+	\begin{figure}[h]
+		\centering
+		\framebox{fig\_trajectory\_ideal} % 图片占位符
+		\caption{无摩擦设置下的实验路径与理论摆线对比}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\framebox{fig\_velocity\_dist} % 图片占位符
+		\caption{速度分布随高度变化曲线}
+	\end{figure}
+	
+	\subsection{消融实验：混合梯度优化的必要性讨论}
+	\begin{table}[h]
+		\caption{优化策略消融实验对比表}
+		\xiaosi
+		\begin{tabular}{lll}
+			\toprule
+			配置方案 & 最优时间 (s) & 结论 \\
+			\midrule
+			Entropy-PSO + Adam & 0.583511 & 易受局部梯度误导 \\
+			单独 Entropy-PSO & 0.583381 & 全局搜索能力更强 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\subsection{摩擦力与阻力的影响 (拓展分析)}
+	复杂物理场设置 $\mu=0.15$，$k_{drag}=0.47$。最优路径耗时为 0.712797s。
+	
+	\subsection{算法性能对比分析}
+	\begin{table}[h]
+		\caption{Standard PSO 与 Entropy-PSO 性能对比}
+		\xiaosi
+		\begin{tabular}{lll}
+			\toprule
+			实验场景 & 算法 & 最短时间 (s) \\
+			\midrule
+			无摩擦场 & Standard PSO & 0.584254 \\
+			无摩擦场 & Entropy-PSO & 0.583381 \\
+			复杂场 & Standard PSO & 0.717063 \\
+			复杂场 & Entropy-PSO & 0.712797 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\section{结论与展望}
+	本文提出的方案能有效解决高维搜索中的早熟收敛问题，未来可扩展至三维轨迹规划。
+	
+	\section*{参考文献}
+	\wuhao % 参考文献使用五号字
+	\begin{enumerate}
+		\item[{[1]}] MITTAL A. Numerical Solution to the Brachistochrone Problem[R]. Stanford University, 2014.
+		\item[{[2]}] ZITAR R A. Capturing the Brachistochrone: Neural Network Supervised and Reinforcement Approaches[J]. International Journal of Innovative Computing, Information and Control, 2019, 15(5): 1747-1761.
+		\item[{[3]}] RAKITIANSKAIA A S, ENGELBRECHT A P. Training Feedforward Neural Networks with Dynamic Particle Swarm Optimisation[J]. Swarm Intelligence, 2012, 6(4): 233-270.
+		\item[{[4]}] ZHAN Z H, ZHANG J, LI Y, et al. Adaptive Particle Swarm Optimization[J]. IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics), 2009, 39(6): 1362-1381.
+		\item[{[5]}] GUO W, ZHU L, WANG L, et al. An Entropy-Assisted Particle Swarm Optimizer for Large-Scale Optimization Problem[J]. Mathematics, 2019, 7(5): 414.
+		\item[{[6]}] 方伟, 孙俊, 须文波. 一种多样性控制的粒子群优化算法[J]. 控制与决策, 2008, 23(8): 863-868.
+	\end{enumerate}
+	
+\end{document}

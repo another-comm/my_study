@@ -1,0 +1,79 @@
+======================================================================
+DWTS fan vote estimation report
+Based on the inverse decision-making (IDM) model
+======================================================================
+
+[1] Model performance
+  Total weeks analyzed: 264
+  Mean soft consistency: 0.4393 (±0.3295)
+  Hard consistency accuracy: 96.97%
+
+[2] Season overview
+  Season 1: method=rank, weeks=3, mean consistency=1.000
+  Season 2: method=rank, weeks=7, mean consistency=1.000
+  Season 3: method=percentage, weeks=7, mean consistency=0.307
+  Season 4: method=percentage, weeks=8, mean consistency=0.337
+  Season 5: method=percentage, weeks=9, mean consistency=0.292
+  Season 6: method=percentage, weeks=8, mean consistency=0.318
+  Season 7: method=percentage, weeks=8, mean consistency=0.321
+  Season 8: method=percentage, weeks=9, mean consistency=0.303
+  Season 9: method=percentage, weeks=9, mean consistency=0.247
+  Season 10: method=percentage, weeks=8, mean consistency=0.335
+  Season 11: method=percentage, weeks=9, mean consistency=0.295
+  Season 12: method=percentage, weeks=8, mean consistency=0.324
+  Season 13: method=percentage, weeks=9, mean consistency=0.308
+  Season 14: method=percentage, weeks=8, mean consistency=0.267
+  Season 15: method=percentage, weeks=7, mean consistency=0.209
+  Season 16: method=percentage, weeks=8, mean consistency=0.341
+  Season 17: method=percentage, weeks=9, mean consistency=0.291
+  Season 18: method=percentage, weeks=7, mean consistency=0.322
+  Season 19: method=percentage, weeks=10, mean consistency=0.283
+  Season 20: method=percentage, weeks=8, mean consistency=0.260
+  Season 21: method=percentage, weeks=7, mean consistency=0.282
+  Season 22: method=percentage, weeks=7, mean consistency=0.241
+  Season 23: method=percentage, weeks=9, mean consistency=0.286
+  Season 24: method=percentage, weeks=8, mean consistency=0.277
+  Season 25: method=percentage, weeks=8, mean consistency=0.287
+  Season 26: method=percentage, weeks=3, mean consistency=0.272
+  Season 27: method=percentage, weeks=7, mean consistency=0.173
+  Season 28: method=rank, weeks=7, mean consistency=0.857
+  Season 29: method=rank, weeks=9, mean consistency=1.000
+  Season 30: method=rank, weeks=8, mean consistency=0.750
+  Season 31: method=rank, weeks=9, mean consistency=1.000
+  Season 32: method=rank, weeks=9, mean consistency=0.778
+  Season 33: method=rank, weeks=6, mean consistency=0.750
+  Season 34: method=rank, weeks=8, mean consistency=0.917
+
+[3] Controversy cases
+
+  Jerry Rice (Season 2)
+    Final placement: 2
+    Weeks competed: 7
+    Avg judge rank: 4.9
+    Avg vote rank: 2.6
+    Times lowest judge score: 1
+    Fan vote - judge gap: -2.3
+
+  Billy Ray Cyrus (Season 4)
+    Final placement: 5
+    Weeks competed: 7
+    Avg judge rank: 5.9
+    Avg vote rank: 2.7
+    Times lowest judge score: 2
+    Fan vote - judge gap: -3.1
+
+  Bristol Palin (Season 11)
+    Final placement: 3
+    Weeks competed: 9
+    Avg judge rank: 6.3
+    Avg vote rank: 2.2
+    Times lowest judge score: 4
+    Fan vote - judge gap: -4.1
+
+  Bobby Bones (Season 27)
+    Final placement: 1
+    Weeks competed: 7
+    Avg judge rank: 7.4
+    Avg vote rank: 3.0
+    Times lowest judge score: 1
+    Fan vote - judge gap: -4.4
