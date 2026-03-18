@@ -18,12 +18,16 @@ __pycache__/
 # Editor and OS clutter
 *~
 ~$*
+* (1).*
 *.tmp
 *.temp
 *.bak
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Archives
+*.zip
 
 # Local IDE settings
 .vscode/
